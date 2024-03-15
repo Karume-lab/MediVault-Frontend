@@ -1,34 +1,27 @@
 "use client";
 import Input from "postcss/lib/input";
 import React from "react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const registeredPatients = [
+const hospitals = [
   {
-    firstName: "Jane",
-    lastName: "Doe",
-    email: "janedoe@gmail.com",
-    phoneNumber: "08012345678",
+    name: "St. Mary's Hospital",
+    email: "stmarys@gmail.com",
+    phone: "08012345678",
   },
 ];
 
-export default function Hospital() {
+export default function Patient() {
   const router = useRouter();
 
-  const handleRequested = async (buttonId) => {
-    await router.push("/Dashboard/Hospital/Requested");
+  const handleHospitals = async (buttonId) => {
+    await router.push("/Dashboard/Patient/hospitals");
     localStorage.setItem("focusedButton", buttonId);
   };
 
-  const handleAll = async (buttonId) => {
-    await router.push("/Dashboard/Hospital/Allpatients");
-    localStorage.setItem("focusedButton", buttonId);
-  };
-
-  const handleRegistered = async (buttonId) => {
-    await router.push("/Dashboard/Hospital");
+  const handleRecords = async (buttonId) => {
+    await router.push("/Dashboard/Patient/myrecords");
     localStorage.setItem("focusedButton", buttonId);
   };
 
@@ -47,25 +40,19 @@ export default function Hospital() {
       <div className="flex justify-between p-6 ">
         <div className="flex flex-row justify-around">
           <button
-            id="registered"
-            onClick={() => handleRegistered("registered")}
+            id="hospitals"
+            onClick={() => handleHospitals("hospitals")}
             className="border-2 p-2  rounded-lg bg-sky-600 hover:bg-sky-900 focus:bg-transparent focus:text-black ml-1 "
           >
-            Registered Patients
+            {" "}
+            Hospitals
           </button>
           <button
-            id="All"
-            onClick={() => handleAll("All")}
+            id="records"
+            onClick={() => handleRecords("records")}
             className="border-2 p-2  rounded-lg bg-sky-600 hover:bg-sky-900 focus:bg-transparent focus:text-black ml-1"
           >
-            All Patients
-          </button>
-          <button
-            id="requested"
-            onClick={() => handleRequested("requested")}
-            className="border-2 p-2  rounded-lg bg-sky-600 hover:bg-sky-900 focus:bg-transparent focus:text-black ml-1"
-          >
-            Requested Patients
+            My Records
           </button>
         </div>
         <div className="flex pl-6 ">
@@ -95,7 +82,7 @@ export default function Hospital() {
       <div className=" flex flex-col ">
         <div className="flex flex-row justify-start items-center text-black font-bold pt-4 ml-28">
           <h3 className="p-1  rounded-b-md border-b-2  border-black shadow-lg text-2xl bg-black bg-opacity-20 text-white ">
-            Registered Patients :
+            Hospitals :
           </h3>
         </div>
         <div>
@@ -131,12 +118,12 @@ export default function Hospital() {
                     className="px-4 py-2 "
                     style={{ backgroundColor: "#f8f8f8" }}
                   >
-                    Phone
+                    Phone number
                   </th>
                 </tr>
               </thead>
               <tbody className="text-sm font-normal text-gray-700">
-                {registeredPatients.map((patient, index) => {
+                {hospitals.map((hospital, index) => {
                   return (
                     <tr className="hover:bg-blue-400 border-b border-gray-200 py-10 font-bold text-white">
                       <td className="px-4 py-4 ">
@@ -155,9 +142,9 @@ export default function Hospital() {
                           />
                         </svg>
                       </td>
-                      <td className="px-4 py-4">{patient.firstName} {patient.lastName}</td>
-                      <td className="px-4 py-4">{ patient.email }</td>
-                      <td className="px-4 py-4">{ patient.phoneNumber }</td>
+                      <td className="px-4 py-4">{ hospital.name }</td>
+                      <td className="px-4 py-4">{hospital.email}</td>
+                      <td className="px-4 py-4">{ hospital.phone}</td>
                     </tr>
                   );
                 })}

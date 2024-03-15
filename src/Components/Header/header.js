@@ -10,6 +10,10 @@ export default function Header() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleOnSignout =()=>{
+    alert("You have been logged out")
+  }
+
   return (
     <div>
       <div className="flex flex-row justify-between justify-center  bg-blue-500 p-6 ">
@@ -45,7 +49,7 @@ export default function Header() {
             </div>
             <div className='hover:bg-blue-400'>
               {/* Sign out */}
-              <button className="text-black">Sign Out</button>
+              <button className="text-black" onClick={handleOnSignout}>Sign Out</button>
             </div>
           </div>
         )}
